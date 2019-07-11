@@ -14,9 +14,22 @@ class UserInterface
 
       case choice
       when "1"
+        puts ""
+        puts "Game instructions:"
+        puts "Answer correctly as many questions in a row as you can."
+        puts "If you get a wrong answer the game will end."
+        puts "Press ENTER to Play!"
+        gets.chomp
         Question.give_user_questions(user)
         user.save
       when "2"
+        puts ""
+        puts "Game instructions:"
+        puts "This is a TIMED game!"
+        puts "You have 30 seconds to answer as many questions as you can."
+        puts "The game will continue until the time runs out, even if you get wrong answers."
+        puts "Press ENTER to Play!"
+        gets.chomp
         TimedGame.give_user_questions(user)
       when "3"
         Question.streak_high_score_board(user)
