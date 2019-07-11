@@ -12,7 +12,9 @@ class UsersQuestions < ActiveRecord::Base
               if question_user.question_id == question_info.id
                 question_info.question.gsub!("&quot;" , '"')
                 question_info.question.gsub!("&#039;" , "'")
-                  puts "#{question_info.question} --> #{question_info.correct_answer}"
+                question_info.save
+                puts "#{question_info.question} --> #{question_info.correct_answer}"
+
               end
             end
           end
