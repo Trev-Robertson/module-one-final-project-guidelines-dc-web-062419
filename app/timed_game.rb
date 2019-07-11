@@ -35,9 +35,9 @@ class TimedGame
                                 question_info.got_right = 1
                                 question_info.save
                                 user.save
-                                if current_score > user.high_score
+                                if current_score > user.timed_high_score
                                     puts "NEW HIGH SCORE OF #{current_score}!!!!"
-                                    user.high_score = current_score
+                                    user.timed_high_score = current_score
                                 else
                                     puts  "Your Score is: #{current_score}"
                                     puts ""
@@ -98,7 +98,8 @@ class TimedGame
                         puts ""
                         puts "Welcome Back, #{user.name}!"
                         puts "Your Most Recent Score Was: #{current_score}"
-                        puts "Your High Score is: #{user.high_score}"
+                        puts "Your Streaking High Score is: #{user.streak_high_score}"
+                        puts "Your Timed High Score is: #{user.timed_high_score}"
                         puts ""
                         UserInterface.user_homescreen(user)
                 end

@@ -40,7 +40,8 @@ class User < ActiveRecord::Base
           name = gets.chomp
         end
       current_user = self.find_or_create_by(name: name)
-      current_user.high_score ||= 0
+      current_user.streak_high_score ||= 0
+      current_user.timed_high_score ||= 0
       current_user.last_score ||= 0
       current_user.save
       puts "==========================================="

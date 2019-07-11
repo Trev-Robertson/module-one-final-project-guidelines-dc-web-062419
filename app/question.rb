@@ -29,9 +29,9 @@ class Question < ActiveRecord::Base
                         question_info.got_right = 1
                         question_info.save
                         user.save
-                          if current_score > user.high_score
+                          if current_score > user.streak_high_score
                             puts "NEW HIGH SCORE OF #{current_score}!!!!"
-                            user.high_score = current_score
+                            user.streak_high_score = current_score
                           else
                             puts  "Your Score is: #{current_score}"
                             puts ""
@@ -69,7 +69,8 @@ class Question < ActiveRecord::Base
                         puts ""
                         puts "Welcome Back, #{user.name}!"
                         puts "Your Most Recent Score Was: #{current_score}"
-                        puts "Your High Score is: #{user.high_score}"
+                        puts "Your Streaking High Score is: #{user.streak_high_score}"
+                        puts "Your Timed High Score is: #{user.timed_high_score}"
                         puts ""
                         UserInterface.user_homescreen(user)
                         break
@@ -77,15 +78,15 @@ class Question < ActiveRecord::Base
                     end
             end
 
-  def self.high_score_board(a)
+  def self.streak_high_score_board(a)
     i = 0
-    sorted_scored = User.all.sort_by{|user| user.high_score}.reverse
+    sorted_scored = User.all.sort_by{|user| user.streak_high_score}.reverse
       puts ""
-      puts "Top 5 Scores"
+      puts "Top 5 Streakers"
       puts "------------"
         sorted_scored.each do |user|
           if i <= 4
-            puts "Name: #{user.name} - Score: #{user.high_score}"
+            puts "Name: #{user.name} - Score: #{user.streak_high_score}"
             i += 1
           end
         end
@@ -96,8 +97,23 @@ class Question < ActiveRecord::Base
       UserInterface.user_homescreen(a)
   end
 
-  # def low_score_board
-  #   User.all.sort_by{|user| user.high_score}
-  # end
+  def self.timed_high_score_board(a)
+    i = 0
+    sorted_scored = User.all.sort_by{|user| user.timed_high_score}.reverse
+      puts ""
+      puts "Top 5 Speedsters"
+      puts "------------"
+        sorted_scored.each do |user|
+          if i <= 4
+            puts "Name: #{user.name} - Score: #{user.timed_high_score}"
+            i += 1
+          end
+        end
+      puts ""
+      puts "Press Enter to return to Home Screen"
+      gets.chomp
+      puts "What would you like to do next?"
+      UserInterface.user_homescreen(a)
+  end
 
 end
