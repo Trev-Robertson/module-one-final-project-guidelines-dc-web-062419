@@ -511,9 +511,9 @@ a.each do |question|
     Question.find_or_create_by(question: question[:question], correct_answer: question[:correct_answer])
 end
 
-User.find_or_create_by(name: "John", high_score: 0)
-User.find_or_create_by(name: "Tim", high_score: 0)
-User.find_or_create_by(name: "Jill", high_score: 0)
-User.find_or_create_by(name: "Dan", high_score: 0)
-User.find_or_create_by(name: "Sofia", high_score: 0)
-User.find_or_create_by(name: "Anne", high_score: 0)
+User.find_or_create_by(name: "John", streak_high_score: 0, timed_high_score: 0)
+User.find_or_create_by(name: "Tim", streak_high_score: 0, timed_high_score: 0)
+User.find_or_create_by(name: "Jill", streak_high_score: 0, timed_high_score: 0)
+User.find_or_create_by(name: "Dan", streak_high_score: 0, timed_high_score: 0)
+User.find_or_create_by(name: "Sofia", streak_high_score: 0, timed_high_score: 0)
+User.find_or_create_by(name: "Anne", streak_high_score: 0, timed_high_score: 0)
