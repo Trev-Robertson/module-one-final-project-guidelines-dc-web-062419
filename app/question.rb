@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
                     puts ""
                     puts ""
                     puts ""
-                    puts  "Answer 'true' or 'false'. Enter 'exit' to quit"  
+                    puts  "Answer 'true' or 'false'. Enter 'EXIT' to quit"  
                     answer = gets.chomp.downcase
                       while answer != "true" && answer != "false" && answer != "exit" do
                         puts "Please input 'true' or 'false'"
