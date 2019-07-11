@@ -32,21 +32,24 @@ class User < ActiveRecord::Base
         puts ""
         puts "Returning users: Please Enter your Username!"
         puts "New users: Please create a Username with less than 10 characters."
-        puts "Only A-z, 0-9, and '_' '-' are allowed, no spaces."
+        puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
         name = gets.chomp
         while !name.match? /\A[a-zA-Z\-_0-9]{1,10}\z/
-          puts "Username not accepted. Please create a Username with less than 10 characters, using a-z"
+          puts "Username not accepted. Please create a Username with less than 10 characters."
+          puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
           name = gets.chomp
         end
       current_user = self.find_or_create_by(name: name)
-      current_user.high_score ||= 0
+      current_user.streak_high_score ||= 0
+      current_user.timed_high_score ||= 0
       current_user.last_score ||= 0
       current_user.save
       puts "==========================================="
       puts ""
       puts "Hi, #{current_user.name}!"
-      puts  "High Score: #{current_user.high_score}"
-      puts  "Last Score: #{current_user.last_score}"
+      puts "Your Most Recent Score was: #{current_user.last_score}"
+      puts "Your Streaking High Score is: #{current_user.streak_high_score}"
+      puts "Your Timed High Score is: #{current_user.timed_high_score}"
       puts ""
       current_user
     end

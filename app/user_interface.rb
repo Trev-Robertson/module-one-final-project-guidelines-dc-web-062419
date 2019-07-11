@@ -1,13 +1,14 @@
 class UserInterface
 
   def self.user_homescreen(user)
-      puts "Enter 1 to START STREAKING"
+      puts "Enter 1 to START STREAKING!"
       puts "Enter 2 to Start NEED FOR SPEED!"
-      puts "Enter 3 to Modify User Name"
-      puts "Enter 4 to see High Scores Table"
-      puts "Enter 5 to Go To Welcome Screen"
+      puts "Enter 3 to See Streaker Hall Of Fame"
+      puts "Enter 4 to See Speedsters Hall Of Fame"
+      puts "Enter 5 to Modify User Name"
       puts "Enter 6 to Delete User"
-      puts "Enter 7 to EXIT"
+      puts "Enter 7 to Go To Welcome Screen"
+      puts "Enter 8 to EXIT"
       choice = gets.chomp.downcase
 
       case choice
@@ -19,27 +20,30 @@ class UserInterface
       when "2"
         TimedGame.give_user_questions(user)
       when "3"
+        Question.streak_high_score_board(user)
+      when "4"
+        Question.timed_high_score_board(user)
+      when "5"
+        puts ""
         puts "Please enter New User Name"
         new_name = gets.chop
         user.name = new_name
         user.save
-        UserInterface.user_homescreen(user)
-      when "4"
-        Question.high_score_board(user)
-      when "5"
-        User.welcome_user
+        Question.return_screen(user)
       when "6"
-        puts "Are you sure you want to delete your user profile?"
+        puts "Are you sure you want to DELETE your user profile, \"#{user.name}\"?"
         puts "You won't be able to recover your stats."
         puts "Enter 'yes' to confirm or enter any key to return to menu"
         answer = gets.chomp.downcase
         if answer == "yes"
+          puts "User \"#{user.name}\" DELETED!"
           user.destroy
-          puts "User Deleted"
         else
           self.user_homescreen(user)
         end
       when "7"
+        User.welcome_user
+      when "8"
         puts ""
         puts "Have a good day!"
       when "exit"
@@ -48,7 +52,7 @@ class UserInterface
       else
           puts "------------------------------"
           puts "Please Select A Valid Option"
-          self.user_homescreen(user)
+          Question.return_screen(user)
       end
   end
 end

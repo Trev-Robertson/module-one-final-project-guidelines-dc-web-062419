@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190709220642) do
+ActiveRecord::Schema.define(version: 20190711154412) do
 
   create_table "questions", force: :cascade do |t|
     t.string "question"
@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 20190709220642) do
 
   create_table "users", force: :cascade do |t|
     t.string  "name"
-    t.integer "high_score"
+    t.integer "streak_high_score"
+    t.integer "timed_high_score"
     t.integer "last_score"
   end
 

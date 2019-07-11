@@ -1,4 +1,5 @@
 require_relative '../config/environment'
 
 
-# User.welcome_user
+
+User.welcome_user
