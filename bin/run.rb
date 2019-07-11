@@ -1,3 +1,4 @@
 require_relative '../config/environment'
 
-User.welcome_user
+UsersQuestions.got_right("1")
+# User.welcome_user
