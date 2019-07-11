@@ -23,13 +23,13 @@ class TimedGame
                             puts ""
                             puts ""
                             puts ""
-                            puts  "Answer 'true' or 'false'. Enter 'EXIT' to quit"  
+                            puts  "Answer 'true' or 'false'. Enter 'EXIT' to quit"
                             answer = gets.chomp.downcase
-                            while answer != "true" && answer != "false" && answer != "exit" do
+                            while answer != "true" && answer != "t" && answer != "false" && answer != "f" && answer != "exit" do
                                 puts "Please input 'true' or 'false'  "
                                 answer = gets.chomp.downcase
                             end
-                            if answer.casecmp(question.correct_answer) == 0
+                            if answer == question.correct_answer || answer == question.correct_answer.first.downcase
                                 puts "Correct!"
                                 current_score += 1
                                 question_info = UsersQuestions.find_or_create_by(question_id: question.id, user_id: user.id)
@@ -52,13 +52,13 @@ class TimedGame
                                 puts ""
                                 puts "WRONG!!!!!!!!!!!"
                                 puts  "Your Score is: #{current_score}"
-                                puts ""             
+                                puts ""
                                 question_info = UsersQuestions.find_or_create_by(question_id: question.id, user_id: user.id)
                                 question_info.got_right = 0
                                 question_info.save
-                                user.save                   
+                                user.save
                                 # break
-    
+
                             end
                     end}
                     puts ""
@@ -97,7 +97,7 @@ class TimedGame
                         Question.return_screen(user)
                     end
 
-            
+
 
 
 end
