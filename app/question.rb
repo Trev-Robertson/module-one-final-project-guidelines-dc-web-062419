@@ -16,13 +16,14 @@ class Question < ActiveRecord::Base
                     puts ""
                     puts ""
                     puts ""
-                    puts  "Answer 'true' or 'false'. Enter 'EXIT' to quit"  
+                    puts  "Answer 'true' or 'false'. Enter 'EXIT' to quit"
                     answer = gets.chomp.downcase
-                      while answer != "true" && answer != "false" && answer != "exit" do
+                      while answer != "true" && answer != "t" && answer != "false" && answer != "f" && answer != "exit" do
                         puts "Please input 'true' or 'false'"
                         answer = gets.chomp.downcase
                       end
-                      if answer.casecmp(question.correct_answer) == 0
+                      if answer == question.correct_answer || answer == question.correct_answer.first.downcase
+                      # if answer.casecmp(question.correct_answer) == 0 || answer.casecmp(question.correct_answer.first.downcase)
                         puts "Correct!"
                         current_score += 1
                         question_info = UsersQuestions.find_or_create_by(question_id: question.id, user_id: user.id)
