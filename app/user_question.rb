@@ -5,9 +5,8 @@ class UsersQuestions < ActiveRecord::Base
   def self.got_right(user)
     User.all.select do |user_info|
       if user == user_info.name
-        puts "#{user}"
+        puts "#{user}'s Right Questions:"
         self.all.select do |question_user|
-      #     # binding.pry
           if user_info.id == question_user.user_id && question_user.got_right == 1
             Question.all.select do |question_info|
               if question_user.question_id == question_info.id
