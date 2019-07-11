@@ -26,9 +26,15 @@ class UserInterface
         UsersQuestions.got_right(user)
       when "6"
         puts ""
-        puts "Please enter New User Name & Press Enter"
-        new_name = gets.chop
-        user.name = new_name
+        puts "Please enter a new Username with less than 10 characters & Press Enter"
+        puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
+        name = gets.chomp
+        while !name.match? /\A[a-zA-Z\-_0-9]{1,10}\z/
+          puts "Username not accepted. Please create a Username with less than 10 characters."
+          puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
+          name = gets.chomp
+        end
+        user.name = name
         user.save
         Question.return_screen(user)
       when "7"
