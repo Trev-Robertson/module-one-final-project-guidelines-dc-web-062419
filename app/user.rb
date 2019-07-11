@@ -15,9 +15,6 @@ class User < ActiveRecord::Base
         when "1"
          user = self.login
          UserInterface.user_homescreen(user)
-        # when "2"
-        #   choice = self.login
-        #   UserInterface.user_homescreen(choice)
       when "2"
             puts ""
             puts Rainbow("Have a good day!")

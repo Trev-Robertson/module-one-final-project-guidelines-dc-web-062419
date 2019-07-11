@@ -4,8 +4,8 @@ class UsersQuestions < ActiveRecord::Base
 
   def self.got_right(user)
     User.all.select do |user_info|
-      if user == user_info.name
-        puts "#{user}'s Right Questions:"
+      if user.name == user_info.name
+        puts "#{user.name}'s Right Questions:"
         self.all.select do |question_user|
           if user_info.id == question_user.user_id && question_user.got_right == 1
             Question.all.select do |question_info|
@@ -17,5 +17,10 @@ class UsersQuestions < ActiveRecord::Base
         end
       end
     end
+    puts ""
+    puts "Press Enter to Return"
+    gets.chomp
+    Question.return_screen(user)
   end
+
 end
