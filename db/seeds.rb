@@ -514,6 +514,6 @@ end
 User.find_or_create_by(name: "John", streak_high_score: 0, timed_high_score: 0)
 User.find_or_create_by(name: "Tim", streak_high_score: 0, timed_high_score: 0)
 User.find_or_create_by(name: "Jill", streak_high_score: 0, timed_high_score: 0)
-User.find_or_create_by(name: "Dan", streak_high_score: 0)
+User.find_or_create_by(name: "Dan", streak_high_score: 0, timed_high_score: 0)
 User.find_or_create_by(name: "Sofia", streak_high_score: 0, timed_high_score: 0)
 User.find_or_create_by(name: "Anne", streak_high_score: 0, timed_high_score: 0)

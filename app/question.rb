@@ -10,7 +10,7 @@ class Question < ActiveRecord::Base
                   questions.each do |question|
                     question.question.gsub!("&quot;" , '"')
                     question.question.gsub!("&#039;" , "'")
-                    puts "========================================================="
+                    puts "==========================================================================="
                     puts ""
                     puts question.question
                     puts ""
@@ -44,6 +44,9 @@ class Question < ActiveRecord::Base
                         UserInterface.user_homescreen(user)
                         break
                       else
+                        puts ""
+                puts "STREAK OVER!"
+                puts ""
                 puts "Your Score Was: #{current_score}"
                         case current_score
                         when 0..13
@@ -64,15 +67,7 @@ class Question < ActiveRecord::Base
                         question_info.got_right = 0
                         question_info.save
                         user.save
-                        puts ""
-                        puts "================================================="
-                        puts ""
-                        puts "Welcome Back, #{user.name}!"
-                        puts "Your Most Recent Score Was: #{current_score}"
-                        puts "Your Streaking High Score is: #{user.streak_high_score}"
-                        puts "Your Timed High Score is: #{user.timed_high_score}"
-                        puts ""
-                        UserInterface.user_homescreen(user)
+                            self.return_screen(user)
                         break
                       end
                     end
@@ -94,7 +89,8 @@ class Question < ActiveRecord::Base
       puts "Press Enter to return to Home Screen"
       gets.chomp
       puts "What would you like to do next?"
-      UserInterface.user_homescreen(a)
+      # UserInterface.user_homescreen(a)
+      self.return_screen(a)
   end
 
   def self.timed_high_score_board(a)
@@ -111,9 +107,25 @@ class Question < ActiveRecord::Base
         end
       puts ""
       puts "Press Enter to return to Home Screen"
-      gets.chomp
+      go_back = gets.chomp
       puts "What would you like to do next?"
-      UserInterface.user_homescreen(a)
+      self.return_screen(a)
+      end
+
+
+    def self.return_screen(user)
+      puts ""
+      puts "====================================="
+      puts ""
+      puts "Welcome Back, #{user.name}!"
+      puts "Your Most Recent Score was: #{user.last_score}"
+      puts "Your Streaking High Score is: #{user.streak_high_score}"
+      puts "Your Timed High Score is: #{user.timed_high_score}"
+      puts ""
+
+      puts "What would you like to do next?"
+      puts ""
+      UserInterface.user_homescreen(user)
   end
 
 end
