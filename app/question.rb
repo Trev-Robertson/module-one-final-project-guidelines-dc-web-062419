@@ -10,6 +10,7 @@ class Question < ActiveRecord::Base
                   questions.each do |question|
                     question.question.gsub!("&quot;" , '"')
                     question.question.gsub!("&#039;" , "'")
+                    question.save
                     puts "==========================================================================="
                     puts ""
                     puts question.question
