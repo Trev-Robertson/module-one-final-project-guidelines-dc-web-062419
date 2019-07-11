@@ -10,7 +10,9 @@ class UsersQuestions < ActiveRecord::Base
           if user_info.id == question_user.user_id && question_user.got_right == 1
             Question.all.select do |question_info|
               if question_user.question_id == question_info.id
-                puts "#{question_info.question} --> #{question_info.correct_answer}"
+                question_info.question.gsub!("&quot;" , '"')
+                question_info.question.gsub!("&#039;" , "'")
+                  puts "#{question_info.question} --> #{question_info.correct_answer}"
               end
             end
           end
