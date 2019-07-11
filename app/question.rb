@@ -11,11 +11,12 @@ class Question < ActiveRecord::Base
                     question.question.gsub!("&quot;" , '"')
                     question.question.gsub!("&#039;" , "'")
                     puts "========================================================="
-                    puts "Answer 'true' or 'false'. Enter 'exit' to quit"
+                    puts ""
                     puts question.question
                     puts ""
                     puts ""
                     puts ""
+                    puts  "Answer 'true' or 'false'. Enter 'exit' to quit"  
                     answer = gets.chomp.downcase
                       while answer != "true" && answer != "false" && answer != "exit" do
                         puts "Please input 'true' or 'false'"
@@ -32,39 +33,44 @@ class Question < ActiveRecord::Base
                             puts "NEW HIGH SCORE OF #{current_score}!!!!"
                             user.high_score = current_score
                           else
-                            puts  "Your score is: #{current_score}"
+                            puts  "Your Score is: #{current_score}"
                             puts ""
                           end
                       elsif
                         answer == "exit"
-                        puts  "Your score was: #{current_score}"
+                        puts  "Your Score Was: #{current_score}"
                         user.last_score = current_score
                         user.save
                         UserInterface.user_homescreen(user)
                         break
                       else
+                puts "Your Score Was: #{current_score}"
                         case current_score
-                        when 0..5
+                        when 0..13
                           puts ""
-                          puts "WRONG! Go study!"
-                        when 6..10
+                          puts "Go study!"
+                        when 14..27
                           puts ""
                           puts "Meh! You can do better"
-                        when 11...15
+                        when 28...40
                           puts ""
                           puts "You're ok... but keep trying"
-                        when 16..20
+                        when 41..50
                           puts ""
                           puts "Ok, I know you've played this 10 times!"
                         end
-                        puts "Your score is: #{current_score}"
-                        puts "Your High Score is: #{user.high_score}"
                         user.last_score = current_score
                         question_info = UsersQuestions.find_or_create_by(question_id: question.id, user_id: user.id)
                         question_info.got_right = 0
                         question_info.save
                         user.save
+                        puts ""
                         puts "================================================="
+                        puts ""
+                        puts "Welcome Back, #{user.name}!"
+                        puts "Your Most Recent Score Was: #{current_score}"
+                        puts "Your High Score is: #{user.high_score}"
+                        puts ""
                         UserInterface.user_homescreen(user)
                         break
                       end
@@ -90,8 +96,8 @@ class Question < ActiveRecord::Base
       UserInterface.user_homescreen(a)
   end
 
-  def low_score_board
-    User.all.sort_by{|user| user.high_score}
-  end
+  # def low_score_board
+  #   User.all.sort_by{|user| user.high_score}
+  # end
 
 end

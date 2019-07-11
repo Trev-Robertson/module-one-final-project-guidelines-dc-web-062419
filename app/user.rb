@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
 
         case choice
         when "1"
-         choice = self.login
-         UserInterface.user_homescreen(choice)
+         user = self.login
+         UserInterface.user_homescreen(user)
         # when "2"
         #   choice = self.login
         #   UserInterface.user_homescreen(choice)
@@ -32,9 +32,10 @@ class User < ActiveRecord::Base
     def self.login
         puts ""
         puts "Returning users: Please Enter your Username!"
-        puts "New users: Please create a Username with less than 10 characters, using a-z"
+        puts "New users: Please create a Username with less than 10 characters."
+        puts "Only A-z, 0-9, and '_' '-' are allowed, no spaces."
         name = gets.chomp
-        while !name.match? /\A[a-zA-Z-_0-9]{1,10}\z/
+        while !name.match? /\A[a-zA-Z\-_0-9]{1,10}\z/
           puts "Username not accepted. Please create a Username with less than 10 characters, using a-z"
           name = gets.chomp
         end
@@ -43,7 +44,8 @@ class User < ActiveRecord::Base
       current_user.last_score ||= 0
       current_user.save
       puts "==========================================="
-      puts "Hi, #{current_user.name}"
+      puts ""
+      puts "Hi, #{current_user.name}!"
       puts  "High Score: #{current_user.high_score}"
       puts  "Last Score: #{current_user.last_score}"
       puts ""
