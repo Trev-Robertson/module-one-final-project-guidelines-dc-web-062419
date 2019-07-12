@@ -65,10 +65,8 @@ class TimedGame
                                     puts ""
                                     puts "Out Of Lives!!!!!!!!!!"
                                     puts ""
-                                #  self.endgame(user, current_score, question_tracker)
                                     break
                                 end
-                                # break
 
                             end
                     end}

@@ -97,7 +97,6 @@ class Question < ActiveRecord::Base
       puts "Press Enter to return to Home Screen"
       gets.chomp
       puts "What would you like to do next?"
-      # UserInterface.user_homescreen(a)
       self.return_screen(a)
   end
 
