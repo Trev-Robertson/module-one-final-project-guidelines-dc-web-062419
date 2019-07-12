@@ -32,7 +32,7 @@ class UserInterface
         puts "This is a TIMED game!"
         puts ""
         puts "You have 30 seconds to answer as many questions as you can."
-        puts "The game will continue until the time runs out, even if you get wrong answers."
+        puts "The game will continue until the time runs out, OR you run out of lives."
         puts "Answer by entering 'true'('t') or 'false'('f'). Enter 'EXIT' to quit"
         puts "Press ENTER to Play!"
         gets.chomp

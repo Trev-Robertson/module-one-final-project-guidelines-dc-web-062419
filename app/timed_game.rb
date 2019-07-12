@@ -3,6 +3,7 @@ class TimedGame
         def self.give_user_questions(user)
                     current_score = 0
                     question_tracker = []
+                    lives = 3
                     questions = Question.all.shuffle
                     puts ""
                     puts "30 seconds GO!!!!!!!"
@@ -21,7 +22,7 @@ class TimedGame
                             puts ""
                             puts question.question
                             puts ""
-                            puts ""
+                            puts "LIVES LEFT #{lives}"
                             puts "TIME REMAINING: Less Than #{current_time.to_i}s"
                             puts  "Enter 'true'('t') or 'false'('f'). Enter 'EXIT' to quit"  
                             answer = gets.chomp.downcase
@@ -57,6 +58,14 @@ class TimedGame
                                 question_info.got_right = 0
                                 question_info.save
                                 user.save
+                                lives -= 1
+                                if lives == 0
+                                    puts ""
+                                    puts "Out Of Lives!!!!!!!!!!"
+                                    puts ""
+                                #  self.endgame(user, current_score, question_tracker)
+                                    break
+                                end
                                 # break
 
                             end
