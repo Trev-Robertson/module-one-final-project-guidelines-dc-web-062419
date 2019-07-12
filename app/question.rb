@@ -39,6 +39,7 @@ class Question < ActiveRecord::Base
                           end
                       elsif
                         answer == "exit"
+                        puts ""
                         puts  "Your Score Was: #{current_score}"
                         user.last_score = current_score
                         user.save

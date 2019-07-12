@@ -45,8 +45,10 @@ class TimedGame
                                     puts ""
                                 end
                             elsif
-                                answer == "exit"
-
+                            answer == "exit"
+                            puts ""
+                        user.last_score = current_score
+                        user.save
                                 break
 
                             else
