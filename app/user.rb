@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
         puts "Valid Usernames have less than 10 characters."
         puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
         name = gets.chomp
+        user = self.all.find { |user| name.downcase == user.name.downcase} 
         while !name.match? /\A[a-zA-Z\-_0-9]{1,10}\z/ || name.casecmp("exit") == 0
           puts ""
           puts "Username not accepted. Please create a Username with less than 10 characters. Or Enter 'exit' to return to Welcome Screen"
@@ -43,7 +44,7 @@ class User < ActiveRecord::Base
         if name.casecmp("exit") == 0
           self.welcome_user
 
-        elsif self.find_by(name: name)
+        elsif user != nil 
           puts ""
           puts "Username already exists, Please try again"
           self.create_new
