@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
 
     def self.welcome_user
+        puts ""
         puts Rainbow("Welcome, Please Enter A Number From The Following Choices")
         puts ""
         puts Rainbow("1. Login")
@@ -66,30 +67,17 @@ class User < ActiveRecord::Base
 
     def self.find_current_user
       puts 'Enter Username'
-      user = gets.chomp
-       if self.find_by(name: user)
-          user = self.find_by(name: user)
-          self.welcome_header(user)
-       else
+      user_name = gets.chomp.downcase
+      user = self.all.find { |user| user_name == user.name.downcase} 
+      if user != nil
+        self.welcome_header(user)
+      else
         puts ""
         puts "User not found! Please go back and Create New User. Press Enter to return"
           gets.chomp
         puts ""
         self.welcome_user
        end
-      # current_user = self.create(name: user
-      # current_user.streak_high_score ||= 0
-      # current_user.timed_high_score ||= 0
-      # current_user.last_score ||= 0
-      # current_user.save
-      # puts "==========================================="
-      # puts ""
-      # puts "Hi, #{current_user.name}!"
-      # puts "Your Most Recent Score was: #{current_user.last_score}"
-      # puts "Your Streaking High Score is: #{current_user.streak_high_score}"
-      # puts "Your Timed High Score is: #{current_user.timed_high_score}"
-      # puts ""
-      # current_user
     end
 
 
