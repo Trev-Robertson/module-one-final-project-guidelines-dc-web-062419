@@ -116,7 +116,7 @@ class Question < ActiveRecord::Base
 
     def self.return_screen(user)
       puts ""
-      puts "====================================="
+      puts "===================================================="
       puts ""
       puts "Welcome Back, #{user.name}!"
       puts "Your Most Recent Score was: #{user.last_score}"

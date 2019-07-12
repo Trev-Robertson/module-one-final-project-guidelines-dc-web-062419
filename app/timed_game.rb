@@ -17,12 +17,12 @@ class TimedGame
                                 current_time = 1
                             end
                             puts "===================================================================================="
-                            puts "                        TIME REMAINING: Less Than #{current_time.to_i}s"
+                            puts ""
                             puts ""
                             puts question.question
                             puts ""
                             puts ""
-                            puts ""
+                            puts "TIME REMAINING: Less Than #{current_time.to_i}s"
                             puts  "Answer 'true' or 'false'. Enter 'EXIT' to quit"  
                             answer = gets.chomp.downcase
                             while answer != "true" && answer != "false" && answer != "exit" do
@@ -65,7 +65,7 @@ class TimedGame
                 self.endgame(user, current_score, question_tracker)
                     rescue Timeout::Error
                         puts ""
-        puts "TIMES UP!! TIMES UP!! TIMES UP!!"
+        puts "TIMES UP!! TIMES UP!! TIMES UP! !TIMES UP!! TIMES UP!! TIMES UP!!"
         puts ""
         self.endgame(user, current_score, question_tracker)
         end

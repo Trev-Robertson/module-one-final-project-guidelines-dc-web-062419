@@ -7,48 +7,90 @@ class User < ActiveRecord::Base
     def self.welcome_user
         puts Rainbow("Welcome, Please Enter A Number From The Following Choices")
         puts ""
-        puts Rainbow("1. Login or Create User")
-        puts Rainbow("2. Exit")
+        puts Rainbow("1. Login")
+        puts "2. Create New User"
+        puts Rainbow("3. Exit")
         choice = gets.chomp
 
         case choice
         when "1"
-         user = self.login
-         UserInterface.user_homescreen(user)
-      when "2"
+         self.find_current_user
+        when "2"
+          self.create_new
+        when "3"
             puts ""
             puts Rainbow("Have a good day!")
-            choice
         else
             puts "Please Select A Valid Option"
             self.welcome_user
         end
     end
 
-    def self.login
+    def self.create_new
         puts ""
-        puts "Returning users: Please Enter your Username!"
-        puts "New users: Please create a Username with less than 10 characters."
+        puts "Please Create Your Username! or enter EXIT to return"
+        puts ""
+        puts "Valid Usernames have less than 10 characters."
         puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
         name = gets.chomp
-        while !name.match? /\A[a-zA-Z\-_0-9]{1,10}\z/
-          puts "Username not accepted. Please create a Username with less than 10 characters."
+        while !name.match? /\A[a-zA-Z\-_0-9]{1,10}\z/ || name.casecmp("exit") == 0
+          puts ""
+          puts "Username not accepted. Please create a Username with less than 10 characters. Or Enter 'exit' to return to Welcome Screen"
           puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
           name = gets.chomp
         end
-      current_user = self.find_or_create_by(name: name)
-      current_user.streak_high_score ||= 0
-      current_user.timed_high_score ||= 0
-      current_user.last_score ||= 0
-      current_user.save
-      puts "==========================================="
-      puts ""
-      puts "Hi, #{current_user.name}!"
-      puts "Your Most Recent Score was: #{current_user.last_score}"
-      puts "Your Streaking High Score is: #{current_user.streak_high_score}"
-      puts "Your Timed High Score is: #{current_user.timed_high_score}"
-      puts ""
-      current_user
+        if name.casecmp("exit") == 0
+          self.welcome_user
+
+        elsif self.find_by(name: name)
+          puts ""
+          puts "Username already exists, Please try again"
+          self.create_new
+        else
+      user = self.create(name: name, streak_high_score: 0, timed_high_score: 0, last_score: 0 )
+      user.save
+      self.welcome_header(user)
+        end
     end
+
+    def self.welcome_header(user)
+      puts "======================================================="
+      puts ""
+      puts "Hi, #{user.name}!"
+      puts "Your Most Recent Score was: #{user.last_score}"
+      puts "Your Streaking High Score is: #{user.streak_high_score}"
+      puts "Your Timed High Score is: #{user.timed_high_score}"
+      puts ""
+      UserInterface.user_homescreen(user)
+    end
+
+    def self.find_current_user
+      puts 'Enter Username'
+      user = gets.chomp
+       if self.find_by(name: user)
+          user = self.find_by(name: user)
+          self.welcome_header(user)
+       else
+        puts ""
+        puts "User not found! Please go back and Create New User. Press Enter to return"
+          gets.chomp
+        puts ""
+        self.welcome_user
+       end
+      # current_user = self.create(name: user
+      # current_user.streak_high_score ||= 0
+      # current_user.timed_high_score ||= 0
+      # current_user.last_score ||= 0
+      # current_user.save
+      # puts "==========================================="
+      # puts ""
+      # puts "Hi, #{current_user.name}!"
+      # puts "Your Most Recent Score was: #{current_user.last_score}"
+      # puts "Your Streaking High Score is: #{current_user.streak_high_score}"
+      # puts "Your Timed High Score is: #{current_user.timed_high_score}"
+      # puts ""
+      # current_user
+    end
+
 
 end
