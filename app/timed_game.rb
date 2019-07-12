@@ -17,7 +17,7 @@ class TimedGame
                             if current_time < 1
                                 current_time = 1
                             end
-                            puts "======================================Streaker=============================================="
+                            puts "======================================SPEEDSTER=============================================="
                             puts ""
                             puts ""
                             puts question.question

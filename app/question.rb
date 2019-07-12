@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
                     question.question.gsub!("&quot;" , '"')
                     question.question.gsub!("&#039;" , "'")
                     question.save
-                    puts "==============================Speedster============================================="
+                    puts "==============================STREAKER============================================="
                     puts ""
                     puts question.question
                     puts ""
