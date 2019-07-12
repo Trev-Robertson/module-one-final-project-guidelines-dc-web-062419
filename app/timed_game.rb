@@ -94,6 +94,8 @@ class TimedGame
                         question_info.got_right = 0
                         question_info.save
                         user.save
+                        puts "Press Enter to Continue"
+                        gets.chomp
                         Question.return_screen(user)
                     end
 

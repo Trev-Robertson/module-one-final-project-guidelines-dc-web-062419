@@ -42,7 +42,9 @@ class Question < ActiveRecord::Base
                         puts  "Your Score Was: #{current_score}"
                         user.last_score = current_score
                         user.save
-                        UserInterface.user_homescreen(user)
+                        puts "Press Enter to Continue"
+                        gets.chomp
+                        self.return_screen(user)
                         break
                       else
                         puts ""
@@ -68,7 +70,9 @@ class Question < ActiveRecord::Base
                         question_info.got_right = 0
                         question_info.save
                         user.save
-                            self.return_screen(user)
+                        puts "Press Enter to Continue"
+                        gets.chomp
+                        self.return_screen(user)
                         break
                       end
                     end
@@ -77,6 +81,8 @@ class Question < ActiveRecord::Base
   def self.streak_high_score_board(a)
     i = 0
     sorted_scored = User.all.sort_by{|user| user.streak_high_score}.reverse
+      puts ""
+      puts "=================================================="
       puts ""
       puts "Top 5 Streakers"
       puts "------------"
@@ -98,6 +104,8 @@ class Question < ActiveRecord::Base
     i = 0
     sorted_scored = User.all.sort_by{|user| user.timed_high_score}.reverse
       puts ""
+      puts "=================================================="
+      puts ""
       puts "Top 5 Speedsters"
       puts "------------"
         sorted_scored.each do |user|
@@ -109,7 +117,7 @@ class Question < ActiveRecord::Base
       puts ""
       puts "Press Enter to return to Home Screen"
       go_back = gets.chomp
-      puts "What would you like to do next?"
+     
       self.return_screen(a)
       end
 
@@ -123,8 +131,8 @@ class Question < ActiveRecord::Base
       puts "Your Streaking High Score is: #{user.streak_high_score}"
       puts "Your Timed High Score is: #{user.timed_high_score}"
       puts ""
-
       puts "What would you like to do next?"
+      puts ""
       puts ""
       UserInterface.user_homescreen(user)
   end
