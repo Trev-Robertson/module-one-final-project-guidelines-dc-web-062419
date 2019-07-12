@@ -38,18 +38,7 @@ class UserInterface
       when "5"
         UsersQuestions.got_right(user)
       when "6"
-        puts ""
-        puts "Please enter a new Username with less than 10 characters & Press Enter"
-        puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
-        name = gets.chomp
-        while !name.match? /\A[a-zA-Z\-_0-9]{1,10}\z/
-          puts "Username not accepted. Please create a Username with less than 10 characters."
-          puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
-          name = gets.chomp
-        end
-        user.name = name
-        user.save
-        Question.return_screen(user)
+        self.modify_username(user)
       when "7"
         puts "Are you sure you want to DELETE your user profile, \"#{user.name}\"?"
         puts "You won't be able to recover your stats."
@@ -75,4 +64,29 @@ class UserInterface
           Question.return_screen(user)
       end
   end
+
+  def self.modify_username(user)
+       puts ""
+        puts "Please enter a new Username with less than 10 characters & Press Enter. Or enter EXIT to return"
+        puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
+        name = gets.chomp
+        while !name.match? /\A[a-zA-Z\-_0-9]{1,10}\z/ || name.casecmp("exit") == 0
+          puts ""
+          puts "Username not accepted. Please create a Username with less than 10 characters. Or enter EXIT to return"
+          puts "Only A-z, 0-9, and '_' or '-' are allowed, no spaces."
+          name = gets.chomp
+        end
+      if name.casecmp("exit") == 0
+        puts ""
+          Question.return_screen(user)
+      elsif User.all.find_by(name: name)
+        puts ""
+          puts "Username already exists, Please try again"
+          self.modify_username(user)
+      else
+        user.name = name
+        user.save
+        Question.return_screen(user)
+      end
+    end
 end
