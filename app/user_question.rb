@@ -14,6 +14,7 @@ class UsersQuestions < ActiveRecord::Base
                 question_info.question.gsub!("&#039;" , "'")
                 question_info.save
                 puts "#{question_info.question} --> #{question_info.correct_answer}"
+
               end
             end
           end
