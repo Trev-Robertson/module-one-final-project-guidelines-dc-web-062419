@@ -17,7 +17,7 @@ class UserInterface
         puts ""
         puts "Game Instructions:"
         puts ""
-        puts "Correctyl answer as many questions in a row as you can."
+        puts "Correctly answer as many questions in a row as you can."
         puts "If you get ONE wrong answer, the game will end."
         puts "Answer by entering 'true'('t') or 'false'('f'). Enter 'EXIT' to quit"
         puts "How far can you STREAK?"
