@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
     def self.welcome_user
         puts ""
-        puts Rainbow("Welcome, Please Enter A Number From The Following Choices")
+        puts Rainbow("Welcome to Streakers and Speedsters! Please Enter A Number From The Following Choices")
         puts ""
         puts Rainbow("1. Login")
         puts "2. Create New User"

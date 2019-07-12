@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
                     question.question.gsub!("&quot;" , '"')
                     question.question.gsub!("&#039;" , "'")
                     question.save
-                    puts "==========================================================================="
+                    puts "==============================Speedster============================================="
                     puts ""
                     puts question.question
                     puts ""
@@ -85,7 +85,7 @@ class Question < ActiveRecord::Base
       puts ""
       puts "=================================================="
       puts ""
-      puts "Top 5 Streakers"
+      puts "Top 5 STREAKERS"
       puts "------------"
         sorted_scored.each do |user|
           if i <= 4
@@ -107,7 +107,7 @@ class Question < ActiveRecord::Base
       puts ""
       puts "=================================================="
       puts ""
-      puts "Top 5 Speedsters"
+      puts "Top 5 SPEEDSTERS"
       puts "------------"
         sorted_scored.each do |user|
           if i <= 4
