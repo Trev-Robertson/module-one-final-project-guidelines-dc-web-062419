@@ -1,5 +1,6 @@
 Question.destroy_all
 User.destroy_all
+UsersQuestions.destroy_all
 
 
 a = [
@@ -517,3 +518,6 @@ User.find_or_create_by(name: "Jill", streak_high_score: 0, timed_high_score: 0)
 User.find_or_create_by(name: "Dan", streak_high_score: 0, timed_high_score: 0)
 User.find_or_create_by(name: "Sofia", streak_high_score: 0, timed_high_score: 0)
 User.find_or_create_by(name: "Anne", streak_high_score: 0, timed_high_score: 0)
+20.times do
+User.find_or_create_by(name: Faker::Name.first_name, streak_high_score: Faker::Number.between(1, 25), timed_high_score: Faker::Number.between(1, 25))
+end
